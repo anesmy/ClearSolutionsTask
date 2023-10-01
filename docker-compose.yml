@@ -1,0 +1,23 @@
+services:
+  app:
+    image: anesmy/clear-solutions-task
+    depends_on:
+      - postgres-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/db
+      SPRING_DATASOURCE_USERNAME: ${username}
+      SPRING_DATASOURCE_PASSWORD: ${password}
+
+  postgres-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: postpass
+    volumes:
+      - 97ec04c45101e3c12a4b13ffe16d12f907240bc01d6254d768d24a8584fa530d:/var/lib/postgresql/data
+
+volumes:
+  97ec04c45101e3c12a4b13ffe16d12f907240bc01d6254d768d24a8584fa530d:
